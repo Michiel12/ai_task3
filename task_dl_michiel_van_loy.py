@@ -3,6 +3,11 @@ import streamlit as st
 st.title('AI task 3 by Michiel Van Loy')
 st.header("Fruit Recognizer App")
 
+
+
+
+
+# EDA
 import os
 import glob
 import matplotlib.pyplot as plt
@@ -59,96 +64,85 @@ def display_images_and_bar_chart():
   # Display the bar chart in Streamlit
   st.pyplot(plt)
 
-# Checkbox to toggle the display of images and bar chart
+# Checkbox to toggle the display of EDA
 show_charts = st.checkbox("Display EDA")
 
-# Conditionally show the charts based on the checkbox state
+# Show EDA based on checkbox state
 if show_charts:
     display_images_and_bar_chart()
 
 
 
 
-
+# Data Augmentation
 from keras.preprocessing.image import ImageDataGenerator
 
-# Example usage:
-training_set, validation_set, test_set = generate_augmented_data()
+# Define directories
+train_dir = 'google_images/training_set'
+test_dir = 'google_images/test_set'
 
-def generate_augmented_data():
-  # Define directories
-  train_dir = 'google_images/training_set'
-  test_dir = 'google_images/test_set'
+# Augmentation variables for training set
+train_val_datagen = ImageDataGenerator(validation_split=0.2,
+                                   rescale = 1./255,
+                                   shear_range = 0.2,
+                                   zoom_range = 0.2,
+                                   vertical_flip= True)
 
-  # Augmentation variables for training set
-  train_val_datagen = ImageDataGenerator(validation_split=0.2,
-                                    rescale = 1./255,
-                                    shear_range = 0.2,
-                                    zoom_range = 0.2,
-                                    vertical_flip= True)
+# Augmentation variables for training set
+test_datagen = ImageDataGenerator(rescale = 1./255)
 
-  # Augmentation variables for training set
-  test_datagen = ImageDataGenerator(rescale = 1./255)
+# Generate batches of augmented data for training set
+training_set = train_val_datagen.flow_from_directory(train_dir,
+                                                 subset='training',
+                                                 target_size = (128, 128),
+                                                 batch_size = 32,
+                                                 class_mode = 'categorical') 
 
-  # Generate batches of augmented data for training set
-  training_set = train_val_datagen.flow_from_directory(train_dir,
-                                                  subset='training',
-                                                  target_size = (128, 128),
-                                                  batch_size = 32,
-                                                  class_mode = 'categorical') 
+# Generate batches of augmented data for the validation set
+validation_set = train_val_datagen.flow_from_directory(train_dir,
+                                                 subset='validation',
+                                                 target_size = (128, 128),
+                                                 batch_size = 32,
+                                                 class_mode = 'categorical')
 
-  # Generate batches of augmented data for the validation set
-  validation_set = train_val_datagen.flow_from_directory(train_dir,
-                                                  subset='validation',
-                                                  target_size = (128, 128),
-                                                  batch_size = 32,
-                                                  class_mode = 'categorical')
-
-  # Generate batches of augmented data for the test set
-  test_set = test_datagen.flow_from_directory(test_dir,
-                                              target_size = (128, 128),
-                                              batch_size = 32,
-                                              class_mode = 'categorical')
-  
-  return training_set, validation_set, test_set
+# Generate batches of augmented data for the test set
+test_set = test_datagen.flow_from_directory(test_dir,
+                                            target_size = (128, 128),
+                                            batch_size = 32,
+                                            class_mode = 'categorical')
 
 
 
 
 
+# Creating model
 # TensorFlow and tf.keras
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import optimizers
 from tensorflow.keras import layers
 
-# Example usage:
-model = create_model()
+NUM_CLASSES = 5
 
-def create_model():
-  NUM_CLASSES = 5
+# Create a sequential model with a list of layers
+model = tf.keras.Sequential([
+  layers.Conv2D(32, (3, 3), input_shape = (128, 128, 3), activation="relu"),
+  layers.MaxPooling2D((2, 2)),
+  layers.Dropout(0.3),
+  layers.Conv2D(32, (3, 3), activation="relu"),
+  layers.MaxPooling2D((2, 2)),
+  layers.Dropout(0.3),
+  layers.Flatten(),
+  layers.Dense(128, activation="relu"),
+  layers.Dense(NUM_CLASSES, activation="softmax")
+])
 
-  # Create a sequential model with a list of layers
-  model = tf.keras.Sequential([
-    layers.Conv2D(32, (3, 3), input_shape = (128, 128, 3), activation="relu"),
-    layers.MaxPooling2D((2, 2)),
-    layers.Dropout(0.3),
-    layers.Conv2D(32, (3, 3), activation="relu"),
-    layers.MaxPooling2D((2, 2)),
-    layers.Dropout(0.3),
-    layers.Flatten(),
-    layers.Dense(128, activation="relu"),
-    layers.Dense(NUM_CLASSES, activation="softmax")
-  ])
+# Compile model
+model.compile(optimizer = optimizers.Adam(learning_rate=0.001), 
+              loss = 'categorical_crossentropy', 
+              metrics = ['accuracy'])
 
-  # Compile model
-  model.compile(optimizer = optimizers.Adam(learning_rate=0.001), 
-                loss = 'categorical_crossentropy', 
-                metrics = ['accuracy'])
-
-  print(model.summary())
-  
-  return model
+print(model.summary())
 
 
 
