@@ -26,13 +26,27 @@ for subdirectory in subdirectories:
     # Store the count in the dictionary
     image_counts[subdirectory] = image_count
     
+    # Create columns for the images
+    col1, col2, col3 = st.columns(3)
+    
     # Show the first images of each category
     images_to_show = 3
     for i in range(min(images_to_show, image_count)):
         image_path = image_files[i]
         img = Image.open(image_path)
-        # Display the image
-        st.image(img, caption=f"{subdirectory}, Image: {i+1}", width=200)
+        # Display the image in the respective column
+        if i == 0:
+            with col1:
+                st.header(f"{subdirectory}, Image: {i+1}")
+                st.image(img, width=200)
+        elif i == 1:
+            with col2:
+                st.header(f"{subdirectory}, Image: {i+1}")
+                st.image(img, width=200)
+        elif i == 2:
+            with col3:
+                st.header(f"{subdirectory}, Image: {i+1}")
+                st.image(img, width=200)
 
 # Create a bar chart
 plt.figure(figsize=(10, 6))
