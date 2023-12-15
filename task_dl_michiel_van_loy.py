@@ -37,15 +37,15 @@ for subdirectory in subdirectories:
         # Display the image in the respective column
         if i == 0:
             with col1:
-                st.header(f"{subdirectory}, Image: {i+1}")
+                st.subheader(f"{subdirectory}, Image: {i+1}")
                 st.image(img, width=200)
         elif i == 1:
             with col2:
-                st.header(f"{subdirectory}, Image: {i+1}")
+                st.subheader(f"{subdirectory}, Image: {i+1}")
                 st.image(img, width=200)
         elif i == 2:
             with col3:
-                st.header(f"{subdirectory}, Image: {i+1}")
+                st.subheader(f"{subdirectory}, Image: {i+1}")
                 st.image(img, width=200)
 
 # Create a bar chart
