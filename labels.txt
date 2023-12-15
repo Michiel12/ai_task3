@@ -1,0 +1,5 @@
+0 apples
+1 bananas
+2 grapes
+3 pears
+4 strawberries
