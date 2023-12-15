@@ -225,7 +225,7 @@ def loss_and_accuracy_graph(history):
   
 # Confusion matrix
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix as sklearn_confusion_matrix, ConfusionMatrixDisplay
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
 
