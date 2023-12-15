@@ -26,13 +26,17 @@ for subdirectory in subdirectories:
     # Store the count in the dictionary
     image_counts[subdirectory] = image_count
     
+    # Create a container to display images horizontally
+    image_container = st.beta_container()
+    
     # Show the first images of each category
     images_to_show = 3
     for i in range(min(images_to_show, image_count)):
         image_path = image_files[i]
         img = Image.open(image_path)
         # Display the image
-        st.image(img, caption=f"{subdirectory}, Image: {i+1}", use_column_width=True)
+        with image_container:
+            st.image(img, caption=f"{subdirectory}, Image: {i+1}", use_column_width=True)
         plt.title(f"{subdirectory}, Image: {i+1}")
         plt.axis('off')
     plt.show()
