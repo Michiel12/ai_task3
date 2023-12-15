@@ -4,6 +4,7 @@ st.title("AI task 3 by Michiel Van Loy")
 st.header("Fruit Recognizer App")
 st.write("On this page, you can view the third AI assignment. I decided to take different fruits as a category because I like some fruit with melted chocolate every once in a while.")
 st.write("When checking the EDA button, you can choose if you want to show the EDA or not. It's also possible to tweak the number of epochs and steps per epoch. After pressing the 'Train model' button, the creating and training will start.")
+st.write("Sadly, Streamlit doesn't like it when I train on their servers, that's we I had to limit the number of epochs and steps. The optimal number I found was 25 epochs and 15 steps.")
 
 # EDA
 import os
@@ -259,8 +260,8 @@ if show_charts:
   
   
 # Sidebar with sliders for steps_per_epoch and epochs
-steps_per_epoch = st.slider("Select Steps per Epoch", min_value=1, max_value=15, value=15)
-epochs = st.slider("Select Number of Epochs", min_value=1, max_value=25, value=25)
+steps_per_epoch = st.slider("Select Steps per Epoch", min_value=1, max_value=10, value=2)
+epochs = st.slider("Select Number of Epochs", min_value=1, max_value=20, value=2)
 
 # Button to trigger training
 if st.button('Train Model'):
