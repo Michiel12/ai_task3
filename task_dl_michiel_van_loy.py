@@ -55,8 +55,7 @@ plt.xlabel('Categorieën')
 plt.ylabel('Aantal afbeeldingen')
 plt.title('Aantal afbeeldingen per categorie')
 plt.xticks(rotation=45, ha='right')
-# Display the bar chart in Streamlit
-st.pyplot(plt)
+plt.show()
 
 
 
