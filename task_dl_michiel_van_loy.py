@@ -59,8 +59,11 @@ def display_images_and_bar_chart():
   # Display the bar chart in Streamlit
   st.pyplot(plt)
 
-# Button to display images and bar chart
-if st.button('EDA'):
+# Checkbox to toggle the display of images and bar chart
+show_charts = st.checkbox("Display EDA")
+
+# Conditionally show the charts based on the checkbox state
+if show_charts:
     display_images_and_bar_chart()
 
 
