@@ -112,7 +112,7 @@ def generate_augmented_data():
                                               batch_size = 32,
                                               class_mode = 'categorical')
   
-  # Display the information in Streamlit
+  # Display information in Streamlit
   st.subheader("Data Information")
   st.write(f"Training Set: Found {training_set.samples} images belonging to {len(training_set.class_indices)} classes.")
   st.write(f"Validation Set: Found {validation_set.samples} images belonging to {len(validation_set.class_indices)} classes.")
@@ -153,6 +153,7 @@ def create_model():
                 metrics = ['accuracy'])
 
   print(model.summary())
+  st.write(model.summary())
   
   return model
 
