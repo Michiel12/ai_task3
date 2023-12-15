@@ -29,14 +29,15 @@ for subdirectory in subdirectories:
     # Create columns for the images
     col1, col2, col3 = st.columns(3)
     
-    # Show the category header only once
-    st.header(subdirectory)
+    
     
     # Show the first images of each category
     images_to_show = 3
     for i in range(min(images_to_show, image_count)):
         image_path = image_files[i]
         img = Image.open(image_path)
+        # Show the category header only once
+        st.header(subdirectory)
         # Display the image in the respective column
         if i == 0:
             with col1:
