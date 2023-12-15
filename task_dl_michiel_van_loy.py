@@ -150,7 +150,7 @@ print(model.summary())
 
 
 # Example usage:
-trained_history = train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=15)
+# trained_history = train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=15)
 
 def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=15):
   history = model.fit(training_set,
@@ -159,6 +159,16 @@ def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=
                   epochs = epochs
                   )
   return history
+
+# Sidebar with sliders for steps_per_epoch and epochs
+steps_per_epoch = st.sidebar.slider("Select Steps per Epoch", min_value=1, max_value=50, value=15)
+epochs = st.sidebar.slider("Select Number of Epochs", min_value=1, max_value=50, value=25)
+
+# Button to trigger training
+if st.sidebar.button('Train Model'):
+    train_model(steps_per_epoch, epochs)
+
+
 
 
 
