@@ -175,7 +175,7 @@ if st.sidebar.button('Train Model'):
 
 
 # Example usage:
-test_loss, test_acc = test_accuracy(model, test_set)
+# test_loss, test_acc = test_accuracy(model, test_set)
 
 def evaluate_test_accuracy(model, test_set):
   # Check test accuracy
@@ -192,7 +192,7 @@ def evaluate_test_accuracy(model, test_set):
 import matplotlib.pyplot as plt
 
 # Example usage:
-loss_and_accuracy(history)
+# loss_and_accuracy(history)
 
 def loss_and_accuracy(history):
   # Create a figure and a grid of subplots with a single call
@@ -232,7 +232,7 @@ from sklearn.preprocessing import LabelEncoder
 import numpy as np
 
 # Example usage:
-plot_confusion_matrix(model, test_set)
+# plot_confusion_matrix(model, test_set)
 
 def confusion_matrix(model, test_set):
   # Generate predictions for all the test images
