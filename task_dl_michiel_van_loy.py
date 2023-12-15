@@ -162,12 +162,12 @@ def create_model():
 
 
 def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=15):
-  history = model.fit(training_set,
-                  validation_data = validation_set,
-                  steps_per_epoch = steps_per_epoch,
-                  epochs = epochs
-                  )
-  for epoch in range(epochs):
+  for epoch in range(epochs): 
+    history = model.fit(training_set,
+                    validation_data = validation_set,
+                    steps_per_epoch = steps_per_epoch,
+                    epochs = epochs
+                    )
     st.write(f"Epoch: {epoch + 1}/{epochs}")
   return history
 
