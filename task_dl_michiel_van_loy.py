@@ -59,7 +59,9 @@ def display_images_and_bar_chart():
   # Display the bar chart in Streamlit
   st.pyplot(plt)
 
-st.button("label", on_click=display_images_and_bar_chart)
+# Button to display images and bar chart
+if st.button('EDA'):
+    display_images_and_bar_chart()
 
 
 
