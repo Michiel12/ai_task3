@@ -3,8 +3,6 @@ import streamlit as st
 st.title('AI task 3 by Michiel Van Loy')
 st.header("Fruit Recognizer App")
 
-st.system("pip install opencv-python==4.5.3.56")
-
 import os
 import glob
 import matplotlib.pyplot as plt
