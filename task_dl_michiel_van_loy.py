@@ -78,6 +78,9 @@ if show_charts:
 from keras.preprocessing.image import ImageDataGenerator
 
 def generate_augmented_data():
+  # Display information in Streamlit
+  st.subheader("Data Information")
+  
   # Define directories
   train_dir = 'google_images/training_set'
   test_dir = 'google_images/test_set'
@@ -112,8 +115,6 @@ def generate_augmented_data():
                                               batch_size = 32,
                                               class_mode = 'categorical')
   
-  # Display information in Streamlit
-  st.subheader("Data Information")
   st.write(f"Training Set: Found {training_set.samples} images belonging to {len(training_set.class_indices)} classes.")
   st.write(f"Validation Set: Found {validation_set.samples} images belonging to {len(validation_set.class_indices)} classes.")
   st.write(f"Test Set: Found {test_set.samples} images belonging to {len(test_set.class_indices)} classes.")
@@ -166,6 +167,7 @@ def create_model():
 def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=15):
   # Display information in Streamlit
   st.subheader("Training the model")
+  
   st.write("Starting training")
   st.write("Training...")
   history = model.fit(training_set,
@@ -182,6 +184,9 @@ def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=
 
 # Test accuracy
 def test_accuracy(model, test_set):
+  # Display information in Streamlit
+  st.subheader("Test accuracy")
+  
   # Check test accuracy
   test_loss, test_acc = model.evaluate(test_set)
   st.write("Test loss:",test_loss)
@@ -236,6 +241,9 @@ import numpy as np
 import seaborn as sns
 
 def confusion_matrix(model, test_set):
+  # Display information in Streamlit
+  st.subheader("Confusion Matrix")
+  
   # Generate predictions for all the test images
   predictions = model.predict(test_set)
 
@@ -258,7 +266,6 @@ def confusion_matrix(model, test_set):
   sns.heatmap(cm, annot=True, fmt='g', cmap='Blues', xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)
   plt.xlabel('Predicted')
   plt.ylabel('Actual')
-  plt.title('Confusion Matrix')
   
   # Disable PyplotGlobalUseWarning
   st.set_option('deprecation.showPyplotGlobalUse', False)
