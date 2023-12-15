@@ -3,7 +3,7 @@ import streamlit as st
 st.title("AI task 3 by Michiel Van Loy")
 st.header("Fruit Recognizer App")
 st.write("On this page, you can view the third AI assignment. I decided to take different fruits as a category because I like some fruit with melted chocolate every once in a while.")
-st.write("When checking the EDA button, you can choose if you want to show the EDA or not. It's also possible to tweak the number of epochs and steps per epoch.")
+st.write("When checking the EDA button, you can choose if you want to show the EDA or not. It's also possible to tweak the number of epochs and steps per epoch. After pressing the 'Train model' button, the creating and training will start.")
 
 
 # EDA
