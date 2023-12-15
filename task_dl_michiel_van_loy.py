@@ -1,10 +1,15 @@
+import streamlit as st
+
+st.title('AI task 3 by Michiel Van Loy')
+st.header("Fruit Recognizer App")
+
 import os
 import glob
 import matplotlib.pyplot as plt
 import cv2
 
 # Specify file locations
-base_directory = "google_images"
+base_directory = "google_images/training_set"
 subdirectories = [d for d in os.listdir(base_directory) if os.path.isdir(os.path.join(base_directory, d))]
 
 # Dictionary to store image counts for each subdirectory
