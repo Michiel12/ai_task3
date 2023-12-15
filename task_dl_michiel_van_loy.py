@@ -112,6 +112,12 @@ def generate_augmented_data():
                                               batch_size = 32,
                                               class_mode = 'categorical')
   
+  # Display the information in Streamlit
+  st.subheader("Data Information")
+  st.write(f"Training Set: Found {training_set.samples} images belonging to {len(training_set.class_indices)} classes.")
+  st.write(f"Validation Set: Found {validation_set.samples} images belonging to {len(validation_set.class_indices)} classes.")
+  st.write(f"Test Set: Found {test_set.samples} images belonging to {len(test_set.class_indices)} classes.")
+  
   return training_set, validation_set, test_set
 
 
@@ -169,6 +175,7 @@ epochs = st.slider("Select Number of Epochs", min_value=1, max_value=50, value=2
 
 # Button to trigger training
 if st.button('Train Model'):
+  st.
   training_set, validation_set, test_set = generate_augmented_data()
   model = create_model()
   train_model(model, training_set, validation_set, epochs, steps_per_epoch)
