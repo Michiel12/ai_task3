@@ -280,5 +280,6 @@ if st.button('Train Model'):
   test_loss, test_acc = test_accuracy(model, test_set)
   st.write(f"Test loss:",test_loss)
   st.write(f"Test accuracy:",test_acc)
+  print(type(model))
   loss_and_accuracy_graph(history)
   confusion_matrix(model, test_set)
