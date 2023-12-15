@@ -30,7 +30,7 @@ for subdirectory in subdirectories:
     col1, col2, col3 = st.columns(3)
     
     # Show the category header only once
-    st.subheader(subdirectory)
+    st.header(subdirectory)
     
     # Show the first images of each category
     images_to_show = 3
@@ -40,12 +40,15 @@ for subdirectory in subdirectories:
         # Display the image in the respective column
         if i == 0:
             with col1:
+                st.subheader(f"Image: {i+1}")
                 st.image(img, width=200)
         elif i == 1:
             with col2:
+                st.subheader(f"Image: {i+1}")
                 st.image(img, width=200)
         elif i == 2:
             with col3:
+                st.subheader(f"Image: {i+1}")
                 st.image(img, width=200)
 
 # Create a bar chart
