@@ -77,9 +77,6 @@ if show_charts:
 # Data Augmentation
 from keras.preprocessing.image import ImageDataGenerator
 
-# Example usage:
-# training_set, validation_set, test_set = generate_augmented_data()
-
 def generate_augmented_data():
   # Define directories
   train_dir = 'google_images/training_set'
@@ -128,9 +125,6 @@ from tensorflow import keras
 from tensorflow.keras import optimizers
 from tensorflow.keras import layers
 
-# Example usage:
-# model = create_model()
-
 def create_model():
   NUM_CLASSES = 5
 
@@ -161,9 +155,6 @@ def create_model():
 
 
 
-# Example usage:
-# trained_history = train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=15)
-
 def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=15):
   history = model.fit(training_set,
                   validation_data = validation_set,
@@ -173,11 +164,11 @@ def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=
   return history
 
 # Sidebar with sliders for steps_per_epoch and epochs
-steps_per_epoch = st.sidebar.slider("Select Steps per Epoch", min_value=1, max_value=50, value=15)
-epochs = st.sidebar.slider("Select Number of Epochs", min_value=1, max_value=50, value=25)
+steps_per_epoch = st.slider("Select Steps per Epoch", min_value=1, max_value=50, value=15)
+epochs = st.slider("Select Number of Epochs", min_value=1, max_value=50, value=25)
 
 # Button to trigger training
-if st.sidebar.button('Train Model'):
+if st.button('Train Model'):
   training_set, validation_set, test_set = generate_augmented_data()
   model = create_model()
   train_model(model, training_set, validation_set, epochs, steps_per_epoch)
