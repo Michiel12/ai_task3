@@ -245,7 +245,7 @@ def confusion_matrix(model, test_set):
   # First, let's transform all the prediction into the winners (otherwise each prediction gives us the 10 probabilities, but we only need the winner, the one our network thinks it is)
   pred = np.argmax(predictions, axis=1)
   # Now, compare the true labels of the test set, to our predicted winners
-  cm = confusion_matrix(numeric_labels, pred)
+  cm = sk_confusion_matrix(numeric_labels, pred)
 
   # Create a confusion matrix heatmap using seaborn
   plt.figure(figsize=(8, 6))
