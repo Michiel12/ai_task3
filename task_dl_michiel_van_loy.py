@@ -6,6 +6,7 @@ st.header("Fruit Recognizer App")
 import os
 import glob
 import matplotlib.pyplot as plt
+from PIL import Image
 
 # Specify file locations
 base_directory = "google_images/training_set"
@@ -29,17 +30,12 @@ for subdirectory in subdirectories:
     images_to_show = 3
     for i in range(min(images_to_show, image_count)):
         image_path = image_files[i]
-        
-        # Display the image using st.image
-        img = plt.imread(image_path)
+        img = Image.open(image_path)
+        # Display the image
         st.image(img, caption=f"{subdirectory}, Image: {i+1}", use_column_width=True)
-
-# Create a bar chart using st.bar_chart
-st.bar_chart(image_counts)
-
-# Show the figure (not necessary in Streamlit)
-# plt.show()
-
+        plt.title(f"{subdirectory}, Image: {i+1}")
+        plt.axis('off')
+    plt.show()
 
 # Create a bar chart
 plt.figure(figsize=(10, 6))
