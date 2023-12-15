@@ -161,6 +161,8 @@ def create_model():
 
 
 
+
+# Training model
 def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=15):
   history = model.fit(training_set,
                   validation_data = validation_set,
@@ -173,7 +175,7 @@ def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=
 
 
 
-
+# Test accuracy
 def test_accuracy(model, test_set):
   # Check test accuracy
   test_loss, test_acc = model.evaluate(test_set)
@@ -184,33 +186,12 @@ def test_accuracy(model, test_set):
 
 
 
-# Sidebar with sliders for steps_per_epoch and epochs
-steps_per_epoch = st.slider("Select Steps per Epoch", min_value=1, max_value=50, value=15)
-epochs = st.slider("Select Number of Epochs", min_value=1, max_value=50, value=25)
-
-# Button to trigger training
-if st.button('Train Model'):
-  training_set, validation_set, test_set = generate_augmented_data()
-  st.write("Starting training")
-  model = create_model()
-  train_model(model, training_set, validation_set, epochs, steps_per_epoch)
-  st.write("Training finished")
-  test_loss, test_acc = test_accuracy(model, test_set)
 
 
-
-
-
-
-
-
-
+# Loss and accuracy graph
 import matplotlib.pyplot as plt
 
-# Example usage:
-# loss_and_accuracy(history)
-
-def loss_and_accuracy(history):
+def loss_and_accuracy_graph(history):
   # Create a figure and a grid of subplots with a single call
   fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10,5))
 
@@ -234,7 +215,38 @@ def loss_and_accuracy(history):
   fig.tight_layout()
 
   # Show the figure
-  plt.show()
+  st.pyplot(fig)
+  
+  
+  
+  
+  
+
+# Sidebar with sliders for steps_per_epoch and epochs
+steps_per_epoch = st.slider("Select Steps per Epoch", min_value=1, max_value=50, value=15)
+epochs = st.slider("Select Number of Epochs", min_value=1, max_value=50, value=25)
+
+# Button to trigger training
+if st.button('Train Model'):
+  training_set, validation_set, test_set = generate_augmented_data()
+  st.write("Starting training")
+  st.write("Training...")
+  model = create_model()
+  history = train_model(model, training_set, validation_set, epochs, steps_per_epoch)
+  st.write("Training finished!")
+  test_loss, test_acc = test_accuracy(model, test_set)
+  st.write(f"Test loss:",test_loss)
+  st.write(f"Test accuracy:",test_acc)
+  loss_and_accuracy_graph(history)
+
+
+
+
+
+
+
+
+
 
 
 
