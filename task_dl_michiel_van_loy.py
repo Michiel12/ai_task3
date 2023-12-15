@@ -31,7 +31,7 @@ for subdirectory in subdirectories:
         image_path = image_files[i]
         img = plt.imread(image_path)
         # Display the image
-        plt.imshow()
+        st.image(img, caption=f"{subdirectory}, Image: {i+1}", use_column_width=True)
         plt.title(f"{subdirectory}, Image: {i+1}")
         plt.axis('off')
     plt.show()
