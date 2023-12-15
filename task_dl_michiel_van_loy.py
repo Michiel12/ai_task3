@@ -57,9 +57,9 @@ def display_images_and_bar_chart():
   # Create a bar chart
   plt.figure(figsize=(10, 6))
   plt.bar(image_counts.keys(), image_counts.values())
-  plt.xlabel('Categorieën')
-  plt.ylabel('Aantal afbeeldingen')
-  plt.title('Aantal afbeeldingen per categorie')
+  plt.xlabel('Categories')
+  plt.ylabel('Image count')
+  plt.title('Number of images per category')
   plt.xticks(rotation=45, ha='right')
   # Display the bar chart in Streamlit
   st.pyplot(plt)
@@ -225,9 +225,10 @@ def loss_and_accuracy_graph(history):
   
 # Confusion matrix
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import confusion_matrix as sklearn_confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
+import seaborn as sns
 
 def confusion_matrix(model, test_set):
   # Generate predictions for all the test images
@@ -247,10 +248,15 @@ def confusion_matrix(model, test_set):
   # Now, compare the true labels of the test set, to our predicted winners
   cm = confusion_matrix(numeric_labels, pred)
 
-  # Make the confusion matrix a little more visually attractive
-  disp = ConfusionMatrixDisplay(confusion_matrix=cm)
-
-  st.pyplot(disp.plot(cmap=plt.cm.Blues))
+  # Create a confusion matrix heatmap using seaborn
+  plt.figure(figsize=(8, 6))
+  sns.heatmap(cm, annot=True, fmt='g', cmap='Blues', xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)
+  plt.xlabel('Predicted')
+  plt.ylabel('Actual')
+  plt.title('Confusion Matrix')
+    
+  # Display confusion matrix
+  st.pyplot()
 
   
   
@@ -276,19 +282,3 @@ if st.button('Train Model'):
   st.write(f"Test accuracy:",test_acc)
   loss_and_accuracy_graph(history)
   confusion_matrix(model, test_set)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
