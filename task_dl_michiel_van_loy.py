@@ -178,9 +178,9 @@ epochs = st.sidebar.slider("Select Number of Epochs", min_value=1, max_value=50,
 
 # Button to trigger training
 if st.sidebar.button('Train Model'):
-  generate_augmented_data()
-  create_model()
-  train_model(steps_per_epoch, epochs)
+  training_set, validation_set = generate_augmented_data()
+  model = create_model()
+  train_model(model, training_set, validation_set, epochs, steps_per_epoch)
 
 
 
