@@ -164,11 +164,16 @@ def create_model():
 
 # Training model
 def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=15):
+  # Display information in Streamlit
+  st.subheader("Training the model")
+  st.write("Starting training")
+  st.write("Training...")
   history = model.fit(training_set,
                   validation_data = validation_set,
                   steps_per_epoch = steps_per_epoch,
                   epochs = epochs
                   )
+  st.write("Training finished!")
   return history
 
 
@@ -179,7 +184,8 @@ def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=
 def test_accuracy(model, test_set):
   # Check test accuracy
   test_loss, test_acc = model.evaluate(test_set)
-  
+  st.write("Test loss:",test_loss)
+  st.write("Test accuracy:",test_acc)
   return test_loss, test_acc
 
 
@@ -274,13 +280,8 @@ epochs = st.slider("Select Number of Epochs", min_value=1, max_value=50, value=2
 # Button to trigger training
 if st.button('Train Model'):
   training_set, validation_set, test_set = generate_augmented_data()
-  st.write("Starting training")
-  st.write("Training...")
   model = create_model()
   history = train_model(model, training_set, validation_set, epochs, steps_per_epoch)
-  st.write("Training finished!")
   test_loss, test_acc = test_accuracy(model, test_set)
-  st.write("Test loss:",test_loss)
-  st.write("Test accuracy:",test_acc)
   loss_and_accuracy_graph(history)
   confusion_matrix(model, test_set)
