@@ -77,39 +77,45 @@ if show_charts:
 # Data Augmentation
 from keras.preprocessing.image import ImageDataGenerator
 
-# Define directories
-train_dir = 'google_images/training_set'
-test_dir = 'google_images/test_set'
+# Example usage:
+# training_set, validation_set, test_set = generate_augmented_data()
 
-# Augmentation variables for training set
-train_val_datagen = ImageDataGenerator(validation_split=0.2,
-                                   rescale = 1./255,
-                                   shear_range = 0.2,
-                                   zoom_range = 0.2,
-                                   vertical_flip= True)
+def generate_augmented_data():
+  # Define directories
+  train_dir = 'google_images/training_set'
+  test_dir = 'google_images/test_set'
 
-# Augmentation variables for training set
-test_datagen = ImageDataGenerator(rescale = 1./255)
+  # Augmentation variables for training set
+  train_val_datagen = ImageDataGenerator(validation_split=0.2,
+                                    rescale = 1./255,
+                                    shear_range = 0.2,
+                                    zoom_range = 0.2,
+                                    vertical_flip= True)
 
-# Generate batches of augmented data for training set
-training_set = train_val_datagen.flow_from_directory(train_dir,
-                                                 subset='training',
-                                                 target_size = (128, 128),
-                                                 batch_size = 32,
-                                                 class_mode = 'categorical') 
+  # Augmentation variables for training set
+  test_datagen = ImageDataGenerator(rescale = 1./255)
 
-# Generate batches of augmented data for the validation set
-validation_set = train_val_datagen.flow_from_directory(train_dir,
-                                                 subset='validation',
-                                                 target_size = (128, 128),
-                                                 batch_size = 32,
-                                                 class_mode = 'categorical')
+  # Generate batches of augmented data for training set
+  training_set = train_val_datagen.flow_from_directory(train_dir,
+                                                  subset='training',
+                                                  target_size = (128, 128),
+                                                  batch_size = 32,
+                                                  class_mode = 'categorical') 
 
-# Generate batches of augmented data for the test set
-test_set = test_datagen.flow_from_directory(test_dir,
-                                            target_size = (128, 128),
-                                            batch_size = 32,
-                                            class_mode = 'categorical')
+  # Generate batches of augmented data for the validation set
+  validation_set = train_val_datagen.flow_from_directory(train_dir,
+                                                  subset='validation',
+                                                  target_size = (128, 128),
+                                                  batch_size = 32,
+                                                  class_mode = 'categorical')
+
+  # Generate batches of augmented data for the test set
+  test_set = test_datagen.flow_from_directory(test_dir,
+                                              target_size = (128, 128),
+                                              batch_size = 32,
+                                              class_mode = 'categorical')
+  
+  return training_set, validation_set, test_set
 
 
 
@@ -172,6 +178,7 @@ epochs = st.sidebar.slider("Select Number of Epochs", min_value=1, max_value=50,
 
 # Button to trigger training
 if st.sidebar.button('Train Model'):
+  generate_augmented_data()
   create_model()
   train_model(steps_per_epoch, epochs)
 
