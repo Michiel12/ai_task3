@@ -1,8 +1,9 @@
 import streamlit as st
 
-st.title('AI task 3 by Michiel Van Loy')
+st.title("AI task 3 by Michiel Van Loy")
 st.header("Fruit Recognizer App")
-st.write("")
+st.write("On this page, you can view the third AI assignment. I decided to take different fruits as a category because I like some fruit with melted chocolate every once in a while.")
+st.write("When checking the EDA button, you can choose if you want to show the EDA or not. It's also possible to tweak the number of epochs and steps per epoch.")
 
 
 # EDA
@@ -270,3 +271,4 @@ if st.button('Train Model'):
   test_loss, test_acc = test_accuracy(model, test_set)
   loss_and_accuracy_graph(history)
   confusion_matrix(model, test_set)
+  st.write("After this assignment, I concluded that it is more difficult and time intensive than expected to train a deep learning model. For us humans it is really easy to recognize these fruit types, but for a machine it is really difficult in the beginning.")
