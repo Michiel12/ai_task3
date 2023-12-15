@@ -224,54 +224,40 @@ def loss_and_accuracy_graph(history):
   
   
 # Confusion matrix
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix as sk_confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
 import seaborn as sns
 
-def confusion_matrix(model, test_set):
-  # # Generate predictions for all the test images
-  # predictions = model.predict(test_set)
+def plot_confusion_matrix(model, test_set):
+  # Generate predictions for all the test images
+  predictions = model.predict(test_set)
 
-  # # Extract labels from image file names
-  # labels = [filename.split('_')[0] for filename in test_set.filenames]
+  # Extract labels from image file names
+  labels = [filename.split('_')[0] for filename in test_set.filenames]
 
-  # # Initialize the label encoder
-  # label_encoder = LabelEncoder()
+  # Initialize the label encoder
+  label_encoder = LabelEncoder()
 
-  # # Fit and transform the labels to numerical values
-  # numeric_labels = label_encoder.fit_transform(labels)
+  # Fit and transform the labels to numerical values
+  numeric_labels = label_encoder.fit_transform(labels)
 
-  # # First, let's transform all the prediction into the winners (otherwise each prediction gives us the 10 probabilities, but we only need the winner, the one our network thinks it is)
-  # pred = np.argmax(predictions, axis=1)
-  # # Now, compare the true labels of the test set, to our predicted winners
-  # cm = confusion_matrix(numeric_labels, pred)
+  # First, let's transform all the prediction into the winners (otherwise each prediction gives us the 10 probabilities, but we only need the winner, the one our network thinks it is)
+  pred = np.argmax(predictions, axis=1)
+  # Now, compare the true labels of the test set, to our predicted winners
+  cm = sk_confusion_matrix(numeric_labels, pred)
 
-  # # Create a confusion matrix heatmap using seaborn
-  # plt.figure(figsize=(8, 6))
-  # sns.heatmap(cm, annot=True, fmt='g', cmap='Blues', xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)
-  # plt.xlabel('Predicted')
-  # plt.ylabel('Actual')
-  # plt.title('Confusion Matrix')
+  # Create a confusion matrix heatmap using seaborn
+  plt.figure(figsize=(8, 6))
+  sns.heatmap(cm, annot=True, fmt='g', cmap='Blues', xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)
+  plt.xlabel('Predicted')
+  plt.ylabel('Actual')
+  plt.title('Confusion Matrix')
     
-  # # Display confusion matrix
-  # st.pyplot()
-  
-  true_labels = np.concatenate([y for x, y in test_set], axis=0)
-  predicted_probs = model.predict(test_set)
-  predicted_labels = np.argmax(predicted_probs, axis=1)
+  # Display confusion matrix
+  st.pyplot()
 
-  # Calculate confusion matrix
-  conf_matrix = confusion_matrix(np.argmax(true_labels, axis=1), predicted_labels)
-  
-  # Display confusion matrix using seaborn heatmap with colors
-  st.subheader("Confusion Matrix:")
-  fig, ax = plt.subplots(figsize=(8, 6))
-  sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues", ax=ax)
-  ax.set_xlabel('Predicted labels')
-  ax.set_ylabel('True labels')
-  st.pyplot(fig)
 
   
   
