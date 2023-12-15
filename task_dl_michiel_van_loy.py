@@ -28,16 +28,20 @@ for subdirectory in subdirectories:
     
     # Show the first images of each category
     images_to_show = 3
+    # Create columns for the images
+    col1, col2, col3 = st.beta_columns(3)
+    
     for i in range(min(images_to_show, image_count)):
         image_path = image_files[i]
         img = Image.open(image_path)
-        # Display the image
-        st.image(img, caption=f"{subdirectory}, Image: {i+1}", width=200)
-        # Add some spacing between images
-        st.text("")
 
-    # Add a horizontal rule to separate categories
-    st.markdown("---")
+        # Display the image in the respective column
+        if i == 0:
+            col1.image(img, caption=f"{subdirectory}, Image: {i+1}", width=200)
+        elif i == 1:
+            col2.image(img, caption=f"{subdirectory}, Image: {i+1}", width=200)
+        elif i == 2:
+            col3.image(img, caption=f"{subdirectory}, Image: {i+1}", width=200)
 
 # Create a bar chart
 plt.figure(figsize=(10, 6))
