@@ -179,7 +179,6 @@ def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=
 def test_accuracy(model, test_set):
   # Check test accuracy
   test_loss, test_acc = model.evaluate(test_set)
-  print('Test accuracy:', test_acc)
   
   return test_loss, test_acc
 
@@ -282,4 +281,4 @@ if st.button('Train Model'):
   st.write("Test loss:",test_loss)
   st.write("Test accuracy:",test_acc)
   loss_and_accuracy_graph(history)
-  confusion_matrix(model, test_set)
+  plot_confusion_matrix(model, test_set)
