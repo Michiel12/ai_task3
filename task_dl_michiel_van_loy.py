@@ -30,8 +30,6 @@ for subdirectory in subdirectories:
     for i in range(min(images_to_show, image_count)):
         image_path = image_files[i]
         img = plt.imread(image_path)
-        # Plot the images in a row
-        plt.subplot(1, images_to_show, i+1)
         # Display the image
         plt.imshow()
         plt.title(f"{subdirectory}, Image: {i+1}")
