@@ -8,55 +8,60 @@ import glob
 import matplotlib.pyplot as plt
 from PIL import Image
 
-# Specify file locations
-base_directory = "google_images/training_set"
-subdirectories = [d for d in os.listdir(base_directory) if os.path.isdir(os.path.join(base_directory, d))]
+def display_images_and_bar_chart():
+  # Specify file locations
+  base_directory = "google_images/training_set"
+  subdirectories = [d for d in os.listdir(base_directory) if os.path.isdir(os.path.join(base_directory, d))]
 
-# Dictionary to store image counts for each subdirectory
-image_counts = {}
+  # Dictionary to store image counts for each subdirectory
+  image_counts = {}
 
-# Loop through each subdirectory and count images
-for subdirectory in subdirectories:
-    # Use glob to get a list of all image files (adjust the file extension if needed)
-    image_files = glob.glob(os.path.join(base_directory, subdirectory, '*.png'))
+  # Loop through each subdirectory and count images
+  for subdirectory in subdirectories:
+      # Use glob to get a list of all image files (adjust the file extension if needed)
+      image_files = glob.glob(os.path.join(base_directory, subdirectory, '*.png'))
 
-    # Count the number of images
-    image_count = len(image_files)
+      # Count the number of images
+      image_count = len(image_files)
 
-    # Store the count in the dictionary
-    image_counts[subdirectory] = image_count
-    
-    # Create columns for the images
-    col1, col2, col3 = st.columns(3)
-    
-    # Show the first images of each category
-    images_to_show = 3
-    for i in range(min(images_to_show, image_count)):
-        image_path = image_files[i]
-        img = Image.open(image_path)
-        # Display the image in the respective column
-        if i == 0:
-            with col1:
-                st.subheader(f"{subdirectory} {i+1}")
-                st.image(img, width=200)
-        elif i == 1:
-            with col2:
-                st.subheader(f"{subdirectory} {i+1}")
-                st.image(img, width=200)
-        elif i == 2:
-            with col3:
-                st.subheader(f"{subdirectory} {i+1}")
-                st.image(img, width=200)
+      # Store the count in the dictionary
+      image_counts[subdirectory] = image_count
+      
+      # Create columns for the images
+      col1, col2, col3 = st.columns(3)
+      
+      # Show the first images of each category
+      images_to_show = 3
+      for i in range(min(images_to_show, image_count)):
+          image_path = image_files[i]
+          img = Image.open(image_path)
+          # Display the image in the respective column
+          if i == 0:
+              with col1:
+                  st.subheader(f"{subdirectory} {i+1}")
+                  st.image(img, width=200)
+          elif i == 1:
+              with col2:
+                  st.subheader(f"{subdirectory} {i+1}")
+                  st.image(img, width=200)
+          elif i == 2:
+              with col3:
+                  st.subheader(f"{subdirectory} {i+1}")
+                  st.image(img, width=200)
 
-# Create a bar chart
-plt.figure(figsize=(10, 6))
-plt.bar(image_counts.keys(), image_counts.values())
-plt.xlabel('Categorieën')
-plt.ylabel('Aantal afbeeldingen')
-plt.title('Aantal afbeeldingen per categorie')
-plt.xticks(rotation=45, ha='right')
-# Display the bar chart in Streamlit
-st.pyplot(plt)
+  # Create a bar chart
+  plt.figure(figsize=(10, 6))
+  plt.bar(image_counts.keys(), image_counts.values())
+  plt.xlabel('Categorieën')
+  plt.ylabel('Aantal afbeeldingen')
+  plt.title('Aantal afbeeldingen per categorie')
+  plt.xticks(rotation=45, ha='right')
+  # Display the bar chart in Streamlit
+  st.pyplot(plt)
+
+st.button("label", on_click=display_images_and_bar_chart)
+
+
 
 
 
