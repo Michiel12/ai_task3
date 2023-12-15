@@ -64,12 +64,6 @@ def display_images_and_bar_chart():
   # Display the bar chart in Streamlit
   st.pyplot(plt)
 
-# Checkbox to toggle the display of EDA
-show_charts = st.checkbox("Display EDA")
-
-# Show EDA based on checkbox state
-if show_charts:
-    display_images_and_bar_chart()
 
 
 
@@ -277,7 +271,16 @@ def confusion_matrix(model, test_set):
   
   
   
-  
+
+
+
+
+# Checkbox to toggle the display of EDA
+show_charts = st.checkbox("Display EDA")
+
+# Show EDA based on checkbox state
+if show_charts:
+    display_images_and_bar_chart()
   
   
 # Sidebar with sliders for steps_per_epoch and epochs
@@ -289,6 +292,18 @@ if st.button('Train Model'):
   training_set, validation_set, test_set = generate_augmented_data()
   model = create_model()
   history = train_model(model, training_set, validation_set, epochs, steps_per_epoch)
-  test_loss, test_acc = test_accuracy(model, test_set)
-  loss_and_accuracy_graph(history)
+  
+  # Checkbox to toggle the display of test loss and accuracy
+  show_test = st.checkbox("Display test loss and accuracy")
+  # Show EDA based on checkbox state
+  if show_test:
+    test_loss, test_acc = test_accuracy(model, test_set)
+  
+  
+  # Checkbox to toggle the display of test loss and accuracy graph
+  show_graph = st.checkbox("Display loss and accuracy graph")
+  # Show EDA based on checkbox state
+  if show_graph:
+    loss_and_accuracy_graph(history)
+    
   confusion_matrix(model, test_set)
