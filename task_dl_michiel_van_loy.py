@@ -253,6 +253,9 @@ def confusion_matrix(model, test_set):
   plt.xlabel('Predicted')
   plt.ylabel('Actual')
   plt.title('Confusion Matrix')
+  
+  # Disable PyplotGlobalUseWarning
+  st.set_option('deprecation.showPyplotGlobalUse', False)
     
   # Display confusion matrix
   st.pyplot()
