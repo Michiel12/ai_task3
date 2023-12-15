@@ -221,46 +221,13 @@ def loss_and_accuracy_graph(history):
   
   
   
-
-# Sidebar with sliders for steps_per_epoch and epochs
-steps_per_epoch = st.slider("Select Steps per Epoch", min_value=1, max_value=50, value=15)
-epochs = st.slider("Select Number of Epochs", min_value=1, max_value=50, value=25)
-
-# Button to trigger training
-if st.button('Train Model'):
-  training_set, validation_set, test_set = generate_augmented_data()
-  st.write("Starting training")
-  st.write("Training...")
-  model = create_model()
-  history = train_model(model, training_set, validation_set, epochs, steps_per_epoch)
-  st.write("Training finished!")
-  test_loss, test_acc = test_accuracy(model, test_set)
-  st.write(f"Test loss:",test_loss)
-  st.write(f"Test accuracy:",test_acc)
-  loss_and_accuracy_graph(history)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+  
+# Confusion matrix
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
-
-# Example usage:
-# plot_confusion_matrix(model, test_set)
 
 def confusion_matrix(model, test_set):
   # Generate predictions for all the test images
@@ -285,3 +252,43 @@ def confusion_matrix(model, test_set):
 
   disp.plot(cmap=plt.cm.Blues)
   plt.show()
+  
+  
+  
+  
+  
+  
+  
+# Sidebar with sliders for steps_per_epoch and epochs
+steps_per_epoch = st.slider("Select Steps per Epoch", min_value=1, max_value=50, value=15)
+epochs = st.slider("Select Number of Epochs", min_value=1, max_value=50, value=25)
+
+# Button to trigger training
+if st.button('Train Model'):
+  training_set, validation_set, test_set = generate_augmented_data()
+  st.write("Starting training")
+  st.write("Training...")
+  model = create_model()
+  history = train_model(model, training_set, validation_set, epochs, steps_per_epoch)
+  st.write("Training finished!")
+  test_loss, test_acc = test_accuracy(model, test_set)
+  st.write(f"Test loss:",test_loss)
+  st.write(f"Test accuracy:",test_acc)
+  loss_and_accuracy_graph(history)
+  confusion_matrix(model, test_set)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
