@@ -32,7 +32,7 @@ for subdirectory in subdirectories:
         image_path = image_files[i]
         img = Image.open(image_path)
         # Display the image
-        st.image(img, caption=f"{subdirectory}, Image: {i+1}", width=10)
+        st.image(img, caption=f"{subdirectory}, Image: {i+1}", width=100)
 
 # Create a bar chart
 plt.figure(figsize=(10, 6))
