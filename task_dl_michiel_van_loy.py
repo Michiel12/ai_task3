@@ -163,12 +163,14 @@ def create_model():
 
 def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=15):
   for epoch in range(epochs): 
+    progress_text = st.sidebar.empty() 
     history = model.fit(training_set,
                     validation_data = validation_set,
                     steps_per_epoch = steps_per_epoch,
                     epochs = epochs
                     )
-    st.write(f"Epoch: {epoch + 1}/{epochs}")
+    progress_text.text(f"Training epoch: {epoch + 1}/{epochs}")
+    # st.write(f"Epoch: {epoch + 1}/{epochs}")
   return history
 
 # Sidebar with sliders for steps_per_epoch and epochs
