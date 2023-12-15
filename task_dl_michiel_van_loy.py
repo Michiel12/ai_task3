@@ -292,18 +292,6 @@ if st.button('Train Model'):
   training_set, validation_set, test_set = generate_augmented_data()
   model = create_model()
   history = train_model(model, training_set, validation_set, epochs, steps_per_epoch)
-  
-  # Checkbox to toggle the display of test loss and accuracy
-  show_test = st.checkbox("Display test loss and accuracy")
-  # Show EDA based on checkbox state
-  if show_test:
-    test_loss, test_acc = test_accuracy(model, test_set)
-  
-  
-  # Checkbox to toggle the display of test loss and accuracy graph
-  show_graph = st.checkbox("Display loss and accuracy graph")
-  # Show EDA based on checkbox state
-  if show_graph:
-    loss_and_accuracy_graph(history)
-    
+  test_loss, test_acc = test_accuracy(model, test_set)
+  loss_and_accuracy_graph(history)
   confusion_matrix(model, test_set)
