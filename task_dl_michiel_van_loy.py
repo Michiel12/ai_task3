@@ -294,6 +294,6 @@ if st.button('Train Model'):
   st.write("Training finished!")
   test_loss, test_acc = test_accuracy(model, test_set)
   st.write("Test loss:",test_loss)
-  st.write("Test accuracy: "+round(test_acc, 2)+"%")
+  st.write("Test accuracy:",test_acc)
   loss_and_accuracy_graph(history)
   confusion_matrix(model, test_set)
