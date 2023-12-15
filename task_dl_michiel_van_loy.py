@@ -250,8 +250,8 @@ def confusion_matrix(model, test_set):
   # Make the confusion matrix a little more visually attractive
   disp = ConfusionMatrixDisplay(confusion_matrix=cm)
 
-  disp.plot(cmap=plt.cm.Blues)
-  plt.show()
+  st.pyplot(disp.plot(cmap=plt.cm.Blues))
+
   
   
   
