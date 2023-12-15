@@ -259,8 +259,8 @@ if show_charts:
   
   
 # Sidebar with sliders for steps_per_epoch and epochs
-steps_per_epoch = st.slider("Select Steps per Epoch", min_value=1, max_value=10, value=2)
-epochs = st.slider("Select Number of Epochs", min_value=1, max_value=15, value=2)
+steps_per_epoch = st.slider("Select Steps per Epoch", min_value=1, max_value=5, value=2)
+epochs = st.slider("Select Number of Epochs", min_value=1, max_value=10, value=2)
 
 # Button to trigger training
 if st.button('Train Model'):
