@@ -122,27 +122,33 @@ from tensorflow import keras
 from tensorflow.keras import optimizers
 from tensorflow.keras import layers
 
-NUM_CLASSES = 5
+# Example usage:
+# model = create_model()
 
-# Create a sequential model with a list of layers
-model = tf.keras.Sequential([
-  layers.Conv2D(32, (3, 3), input_shape = (128, 128, 3), activation="relu"),
-  layers.MaxPooling2D((2, 2)),
-  layers.Dropout(0.3),
-  layers.Conv2D(32, (3, 3), activation="relu"),
-  layers.MaxPooling2D((2, 2)),
-  layers.Dropout(0.3),
-  layers.Flatten(),
-  layers.Dense(128, activation="relu"),
-  layers.Dense(NUM_CLASSES, activation="softmax")
-])
+def create_model():
+  NUM_CLASSES = 5
 
-# Compile model
-model.compile(optimizer = optimizers.Adam(learning_rate=0.001), 
-              loss = 'categorical_crossentropy', 
-              metrics = ['accuracy'])
+  # Create a sequential model with a list of layers
+  model = tf.keras.Sequential([
+    layers.Conv2D(32, (3, 3), input_shape = (128, 128, 3), activation="relu"),
+    layers.MaxPooling2D((2, 2)),
+    layers.Dropout(0.3),
+    layers.Conv2D(32, (3, 3), activation="relu"),
+    layers.MaxPooling2D((2, 2)),
+    layers.Dropout(0.3),
+    layers.Flatten(),
+    layers.Dense(128, activation="relu"),
+    layers.Dense(NUM_CLASSES, activation="softmax")
+  ])
 
-print(model.summary())
+  # Compile model
+  model.compile(optimizer = optimizers.Adam(learning_rate=0.001), 
+                loss = 'categorical_crossentropy', 
+                metrics = ['accuracy'])
+
+  print(model.summary())
+  
+  return model
 
 
 
@@ -166,7 +172,8 @@ epochs = st.sidebar.slider("Select Number of Epochs", min_value=1, max_value=50,
 
 # Button to trigger training
 if st.sidebar.button('Train Model'):
-    train_model(steps_per_epoch, epochs)
+  create_model()
+  train_model(steps_per_epoch, epochs)
 
 
 
