@@ -6,7 +6,6 @@ st.header("Fruit Recognizer App")
 import os
 import glob
 import matplotlib.pyplot as plt
-import cv2
 
 # Specify file locations
 base_directory = "google_images/training_set"
@@ -30,13 +29,11 @@ for subdirectory in subdirectories:
     images_to_show = 3
     for i in range(min(images_to_show, image_count)):
         image_path = image_files[i]
-        img = cv2.imread(image_path)
+        img = plt.imread(image_path)
         # Plot the images in a row
         plt.subplot(1, images_to_show, i+1)
-        # convert the image from BGR into RGB
-        img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         # Display the image
-        plt.imshow(img_rgb)
+        plt.imshow()
         plt.title(f"{subdirectory}, Image: {i+1}")
         plt.axis('off')
     plt.show()
