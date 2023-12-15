@@ -2,9 +2,7 @@ import streamlit as st
 
 st.title('AI task 3 by Michiel Van Loy')
 st.header("Fruit Recognizer App")
-
-
-
+st.write("")
 
 
 # EDA
@@ -66,8 +64,6 @@ def display_images_and_bar_chart():
 
 
 
-
-
 # Data Augmentation
 from keras.preprocessing.image import ImageDataGenerator
 
@@ -117,8 +113,6 @@ def generate_augmented_data():
 
 
 
-
-
 # Creating model
 # TensorFlow and tf.keras
 import tensorflow as tf
@@ -153,10 +147,6 @@ def create_model():
 
 
 
-
-
-
-
 # Training model
 def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=15):
   # Display information in Streamlit
@@ -174,8 +164,6 @@ def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=
 
 
 
-
-
 # Test accuracy
 def test_accuracy(model, test_set):
   # Display information in Streamlit
@@ -186,9 +174,6 @@ def test_accuracy(model, test_set):
   st.write("Test loss:",test_loss)
   st.write("Test accuracy:",test_acc)
   return test_loss, test_acc
-
-
-
 
 
 
@@ -220,11 +205,7 @@ def loss_and_accuracy_graph(history):
 
   # Show the figure
   st.pyplot(fig)
-  
-  
-  
-  
-  
+
   
   
 # Confusion matrix
@@ -267,12 +248,6 @@ def confusion_matrix(model, test_set):
   # Display confusion matrix
   st.pyplot()
 
-  
-  
-  
-  
-
-
 
 
 # Checkbox to toggle the display of EDA
@@ -284,8 +259,8 @@ if show_charts:
   
   
 # Sidebar with sliders for steps_per_epoch and epochs
-steps_per_epoch = st.slider("Select Steps per Epoch", min_value=1, max_value=50, value=15)
-epochs = st.slider("Select Number of Epochs", min_value=1, max_value=50, value=25)
+steps_per_epoch = st.slider("Select Steps per Epoch", min_value=1, max_value=30, value=15)
+epochs = st.slider("Select Number of Epochs", min_value=1, max_value=30, value=25)
 
 # Button to trigger training
 if st.button('Train Model'):
