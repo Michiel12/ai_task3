@@ -153,7 +153,6 @@ def create_model():
                 metrics = ['accuracy'])
 
   print(model.summary())
-  st.write(model.summary())
   
   return model
 
@@ -168,6 +167,8 @@ def train_model(model, training_set, validation_set, epochs=25, steps_per_epoch=
                   steps_per_epoch = steps_per_epoch,
                   epochs = epochs
                   )
+  for epoch in range(epochs):
+    st.write(f"Epoch: {epoch + 1}/{epochs}")
   return history
 
 # Sidebar with sliders for steps_per_epoch and epochs
@@ -177,6 +178,7 @@ epochs = st.slider("Select Number of Epochs", min_value=1, max_value=50, value=2
 # Button to trigger training
 if st.button('Train Model'):
   training_set, validation_set, test_set = generate_augmented_data()
+  st.write("Starting training")
   model = create_model()
   train_model(model, training_set, validation_set, epochs, steps_per_epoch)
 
